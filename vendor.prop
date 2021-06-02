@@ -139,6 +139,7 @@ vendor.display.smomo_camera_support=1
 vendor.display.smomo_game_support=0
 vendor.display.use_layer_ext=1
 vendor.display.use_smooth_motion=1
+vendor.display.disable_rotator_downscale=1
 
 # Display post-processing
 debug.sf.disable_client_composition_cache=1
