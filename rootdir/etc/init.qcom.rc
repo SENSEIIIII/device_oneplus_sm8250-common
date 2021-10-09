@@ -881,7 +881,7 @@ service diag_mdlog_system_start /system/system_ext/bin/diag_mdlog_system -q 2 -c
     class late_start
     user shell
     group system oem_2901 oem_2902 sdcard_rw sdcard_r media_rw
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
     disabled
     oneshot
 
@@ -889,7 +889,7 @@ service diag_mdlog_system_stop /system/system_ext/bin/diag_mdlog_system -k
     class late_start
     user shell
     group system oem_2901 sdcard_rw sdcard_r media_rw
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
     disabled
     oneshot
 
@@ -898,7 +898,7 @@ service diag_mdlog_wifi_start /system/system_ext/bin/diag_mdlog_system  -j 5 -s 
     class late_start
     user shell
     group system oem_2901 sdcard_rw sdcard_r media_rw
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
     disabled
     oneshot
 
@@ -907,7 +907,7 @@ service diag_mdlog_wifi_stop /system/system_ext/bin/diag_mdlog_system   -k -j 5
     class late_start
     user shell
     group system oem_2901 sdcard_rw sdcard_r media_rw
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
     disabled
     oneshot
 
