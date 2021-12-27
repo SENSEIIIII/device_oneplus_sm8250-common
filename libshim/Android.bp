@@ -21,3 +21,10 @@ cc_library_shared {
     compile_multilib: "64",
     system_ext_specific: true,
 }
+
+// libshim_libcdfw_remote_api
+cc_library_shared {
+    name: "libshim_libcdfw_remote_api",
+    srcs: ["libshim_libcdfw_remote_api.cpp"],
+    compile_multilib: "64",
+}
