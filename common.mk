@@ -269,10 +269,6 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor
 
-# Dolby
-PRODUCT_PACKAGES += \
-    OPSoundTunerOverlay
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.4-service.clearkey
@@ -384,6 +380,16 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw \
     libstagefright_omx.vendor
+
+# OPFeature
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/odm/odm_feature_list:$(TARGET_COPY_OUT_ODM)/etc/odm_feature_list
+
+# OnePlus Apps
+PRODUCT_PACKAGES += \
+    OPSoundTunerOverlay \
+    OnePlusCameraOverlay \
+    OnePlusGalleryOverlay
 
 # Power
 PRODUCT_PACKAGES += \
