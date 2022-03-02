@@ -33,6 +33,25 @@
 #define OP_DISPLAY_NOTIFY_PRESS 9
 #define OP_DISPLAY_SET_DIM 10
 
+#define AUTH_STATUS_PATH   "/sys/class/drm/card0-DSI-1/auth_status"
+#define CANCEL_STATUS_PATH "/sys/class/drm/card0-DSI-1/cancel_status"
+#define POWER_STATUS_PATH  "/sys/class/drm/card0-DSI-1/power_status"
+
+int isCancelled = 0;
+
+namespace {
+
+/*
+ * Write value to path and close file.
+ */
+template <typename T>
+static void set(const std::string& path, const T& value) {
+    std::ofstream file(path);
+    file << value;
+}
+
+} // anonymous namespace
+
 namespace android {
 namespace hardware {
 namespace biometrics {
@@ -79,16 +98,25 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
-    mVendorDisplayService->setMode(OP_DISPLAY_SET_DIM, 1);
     mVendorDisplayService->setMode(OP_DISPLAY_NOTIFY_PRESS, 1);
 
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
-    mVendorDisplayService->setMode(OP_DISPLAY_SET_DIM, 0);
+    isCancelled = 0;
     mVendorDisplayService->setMode(OP_DISPLAY_NOTIFY_PRESS, 0);
 
+    return Void();
+}
+
+Return<void> BiometricsFingerprint::onHideUdfpsOverlay() {
+    isCancelled = 0;
+    mVendorDisplayService->setMode(OP_DISPLAY_NOTIFY_PRESS, 0);
+    return Void();
+}
+
+Return<void> BiometricsFingerprint::onShowUdfpsOverlay() {
     return Void();
 }
 
@@ -110,14 +138,6 @@ Return<RequestStatus> BiometricsFingerprint::ErrorFilter(int32_t error) {
             ALOGE("An unknown error returned from fingerprint vendor library: %d", error);
             return RequestStatus::SYS_UNKNOWN;
     }
-}
-
-Return<void> BiometricsFingerprint::onHideUdfpsOverlay() {
-    return Void();
-}
-
-Return<void> BiometricsFingerprint::onShowUdfpsOverlay() {
-    return Void();
 }
 
 // Translate from errors returned by traditional HAL (see fingerprint.h) to
@@ -182,7 +202,7 @@ Return<uint64_t> BiometricsFingerprint::setNotify(
         const sp<IBiometricsFingerprintClientCallback>& clientCallback) {
     std::lock_guard<std::mutex> lock(mClientCallbackMutex);
     mClientCallback = clientCallback;
-    // This is here because HAL 2.1 doesn't have a way to propagate a
+    // This is here because HAL 2.3 doesn't have a way to propagate a
     // unique token for its driver. Subsequent versions should send a unique
     // token for each call to setNotify(). This is fine as long as there's only
     // one fingerprint device on the platform.
@@ -190,6 +210,8 @@ Return<uint64_t> BiometricsFingerprint::setNotify(
 }
 
 Return<uint64_t> BiometricsFingerprint::preEnroll()  {
+    set(POWER_STATUS_PATH, 1);
+
     return mDevice->pre_enroll(mDevice);
 }
 
@@ -217,9 +239,11 @@ Return<uint64_t> BiometricsFingerprint::getAuthenticatorId() {
 }
 
 Return<RequestStatus> BiometricsFingerprint::cancel() {
+    isCancelled = 1;
     mVendorDisplayService->setMode(OP_DISPLAY_SET_DIM, 0);
     mVendorFpService->updateStatus(OP_FINISH_FP_ENROLL);
     mVendorFpService->updateStatus(OP_ENABLE_FP_LONGPRESS);
+    set(CANCEL_STATUS_PATH, 1);
 
     return ErrorFilter(mDevice->cancel(mDevice));
 }
@@ -248,7 +272,12 @@ Return<RequestStatus> BiometricsFingerprint::setActiveGroup(uint32_t gid,
 
 Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId,
         uint32_t gid) {
-    mVendorDisplayService->setMode(OP_DISPLAY_SET_DIM, 0);
+    set(POWER_STATUS_PATH, 1);
+    set(CANCEL_STATUS_PATH, 0);
+    if (isCancelled)
+        mVendorDisplayService->setMode(OP_DISPLAY_SET_DIM, 0);
+    else
+        set(AUTH_STATUS_PATH, 1);
     mVendorFpService->updateStatus(OP_ENABLE_FP_LONGPRESS);
 
     return ErrorFilter(mDevice->authenticate(mDevice, operationId, gid));
@@ -298,7 +327,7 @@ fingerprint_device_t* BiometricsFingerprint::openHal() {
     }
 
     if (kVersion != device->version) {
-        // enforce version on new devices because of HIDL@2.1 translation layer
+        // enforce version on new devices because of HIDL@2.3 translation layer
         ALOGE("Wrong fp version. Expected %d, got %d", kVersion, device->version);
         return nullptr;
     }

@@ -2,3 +2,5 @@ allow init hal_drm_hwservice:hwservice_manager { add find };
 allow init hal_power_service:service_manager add;
 allow init hidl_base_hwservice:hwservice_manager add;
 allow init vendor_hal_perf_hwservice:hwservice_manager find;
+allow init sysfs_battery_supply:file setattr;
+allow init adsprpcd_file:file mounton;
