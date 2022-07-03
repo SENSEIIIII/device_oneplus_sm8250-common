@@ -50,17 +50,9 @@ BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-#TARGET_KERNEL_CLANG_PATH := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-neutron
-KERNEL_TOOLCHAIN := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-neutron/bin
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc OEM_TARGET_PRODUCT=$(PRODUCT_DEVICE)
 TARGET_KERNEL_SOURCE := kernel/oneplus/sm8250
-TARGET_KERNEL_CLANG_VERSION := neutron
 TARGET_KERNEL_CONFIG := vendor/kona-perf_defconfig
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
-KERNEL_SUPPORTS_LLVM_TOOLS := true
-#TARGET_CLANG_PREBUILTS_VERSION := neutron
-#TARGET_CLANG_WITH_GNU_BINUTILS := true
-#TARGET_NEEDS_PREBUILT_FLEX_BISON := true
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
