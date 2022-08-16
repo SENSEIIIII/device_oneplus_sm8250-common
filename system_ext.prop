@@ -11,6 +11,11 @@ persist.bluetooth.bqr.min_interval_ms=60000
 debug.sf.enable_hwc_vds=1
 debug.sf.latch_unsignaled=1
 
+# Camera
+persist.camera.privapp.list=com.oneplus.camera
+persist.vendor.camera.privapp.list=com.oneplus.camera
+ro.oplus.version.base=19839.3.123.2022082613030810219754
+
 # CNE
 persist.vendor.cne.feature=1
 
