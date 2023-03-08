@@ -341,6 +341,10 @@ PRODUCT_PACKAGES += \
     OPSoundTunerOverlay \
     WifiResTarget
 
+# OnePlus camera
+PRODUCT_COPY_FILES += \
+$(LOCAL_PATH)/configs/permissions/oplus_google_lens_config.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/oplus_google_lens_config.xml
+
 # Oplus-fwk
 PRODUCT_PACKAGES += \
     oplus-fwk
