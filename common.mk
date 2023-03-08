@@ -313,6 +313,10 @@ PRODUCT_PACKAGES += \
     OPlusExtras \
     tri-state-key-calibrate
 
+# OnePlus camera
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/permissions/oplus_google_lens_config.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/oplus_google_lens_config.xml
+
 # Overlays
 $(call inherit-product, hardware/oplus/overlay/qssi/qssi.mk)
 
