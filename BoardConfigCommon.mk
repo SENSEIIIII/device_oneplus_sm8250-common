@@ -122,7 +122,10 @@ BOARD_RAMDISK_USE_LZ4 := true
 TARGET_KERNEL_ADDITIONAL_FLAGS := BRAND_SHOW_FLAG=oneplus
 TARGET_KERNEL_SOURCE := kernel/oneplus/sm8250
 TARGET_KERNEL_CONFIG := vendor/kona-perf_defconfig
-TARGET_KERNEL_CLANG_VERSION := latest
+KERNEL_TOOLCHAIN := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-neutron/bin
+TARGET_KERNEL_CLANG_VERSION := neutron
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
+KERNEL_SUPPORTS_LLVM_TOOLS := true
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
