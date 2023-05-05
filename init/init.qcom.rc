@@ -363,6 +363,10 @@ on post-fs-data
     chown radio radio /data/vendor/radio/qcrilNr_prebuilt.db
     chmod 0660 /data/vendor/radio/qcrilNr_prebuilt.db
 
+    # Enable touchpanel's offscreen gestures
+    chown system system /proc/touchpanel/aosp_gesture_enable
+    write /proc/touchpanel/aosp_gesture_enable 1
+
     # File flags for prebuilt ril db file
     write /data/vendor/radio/prebuilt_db_support 1
     chown radio radio /data/vendor/radio/prebuilt_db_support
