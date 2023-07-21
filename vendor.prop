@@ -117,10 +117,6 @@ ro.bluetooth.a2dp_offload.supported=true
 ro.vendor.bluetooth.wipower=false
 vendor.qcom.bluetooth.soc=hastings
 
-# Camera
-vendor.camera.algo.jpeghwencode=0
-vendor.camera.aux.packagelist=android,com.oneplus.camera
-
 # Chipset
 ro.soc.manufacturer=QTI
 ro.soc.model=SM8250
@@ -186,9 +182,6 @@ ro.incremental.enable=yes
 # Media
 debug.stagefright.ccodec=4
 debug.stagefright.omx_default_rank=0
-
-# Multi-gen LRU
-persist.device_config.mglru_native.lru_gen_config=all
 
 # Netflix
 ro.netflix.bsp_rev=Q8250-19134-1
