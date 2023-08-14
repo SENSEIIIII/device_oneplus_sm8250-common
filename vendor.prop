@@ -229,6 +229,7 @@ ro.telephony.default_network=33,22
 # Sensors
 persist.vendor.sensors.allow_non_default_discovery=true
 persist.vendor.sensors.sync_request=true
+vendor.sensor.hal.pickup=android.sensor.tilt_detector
 
 # USB
 vendor.usb.diag.func.name=diag
