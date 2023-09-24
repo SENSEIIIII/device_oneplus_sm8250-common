@@ -19,8 +19,7 @@
 
     <!-- Names of the key handler classes -->
     <string-array name="config_deviceKeyHandlerClasses" translatable="false">
-        <item>org.evolution.oplus.OPlusExtras.slider.KeyHandler</item>
-        <item>org.evolution.oplus.OPlusExtras.touch.KeyHandler</item>
+        <item>org.lineageos.settings.slider.KeyHandler</item>
     </string-array>
 
     <!-- Hardware keys present on the device, stored as a bit field.
