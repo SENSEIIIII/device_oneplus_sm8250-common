@@ -126,7 +126,7 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_RAMDISK_USE_LZ4 := true
 TARGET_KERNEL_ADDITIONAL_FLAGS := BRAND_SHOW_FLAG=oneplus
 TARGET_KERNEL_SOURCE := kernel/oneplus/sm8250
-TARGET_KERNEL_CONFIG := vendor/kona-perf_defconfig vendor/debugfs.config
+TARGET_KERNEL_CONFIG := vendor/kona-perf_defconfig vendor/debugfs.config ksu.config
 
 # Lineage Health
 TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/oplus_chg/battery/mmi_charging_enable
