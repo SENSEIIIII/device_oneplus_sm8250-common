@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2022 The Evolution X Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+
+    <!-- DerpFest maintainer -->
+    <string name="maintainer">Maintainer</string>
+    <string name="maintainer_name" translatable="false">Saurabh_Parab</string>
+    <string name="maintainer_telegram" translatable="false">https://t.me/saurabh_parab</string>
+
+</resources>
