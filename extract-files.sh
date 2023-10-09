@@ -94,6 +94,9 @@ function blob_fixup() {
         vendor/bin/sensors.qti)
             "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
             ;;
+        odm/lib64/libdmtpclient.so)
+            "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
+            ;;
     esac
 }
 
