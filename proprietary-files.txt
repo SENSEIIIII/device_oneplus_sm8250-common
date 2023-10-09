@@ -1,7 +1,3 @@
-#temporary
-odm/lib64/lib-virtual-modem-protos.so
-vendor/lib64/libssc.so
-
 ## All proprietary files from this list, unless pinned and noted otherwise, are
 ## from OnePlus 8 Pro (IN2025_13.1.0.582(EX01)).
 
