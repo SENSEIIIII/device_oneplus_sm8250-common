@@ -964,6 +964,12 @@ vendor/etc/init/vendor.qti.hardware.alarm@1.0-service.rc
 vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 
+# Protobuf - from OOS 13.1.0.582(EX01)
+vendor/lib/libprotobuf-cpp-lite-3.9.1.so|32c7bfd361d7570a42ebddd5a9e50ffc28ea69d5
+vendor/lib/libprotobuf-cpp-full-3.9.1.so|0f216dad5e8ec9ecedf1bed3d677f58c96cff00b
+vendor/lib64/libprotobuf-cpp-lite-3.9.1.so|a946f162883a8c1b1ccecc602f00b56360fd8a81
+vendor/lib64/libprotobuf-cpp-full-3.9.1.so|21a3a5db0ef6e423769ff5848161771c0bb701ab
+
 # QCC
 vendor/lib64/vendor.qti.hardware.qccsyshal@1.0.so
 
