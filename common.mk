@@ -382,6 +382,10 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/oplus
 
+# Touch
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.oplus
+
 # Telephony
 PRODUCT_PACKAGES += \
     extphonelib \
