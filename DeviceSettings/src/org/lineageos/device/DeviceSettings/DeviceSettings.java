@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2022 crDroid Android Project
+ * Copyright (C) 2018-2024 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *
 
 package org.lineageos.device.DeviceSettings;
 
@@ -32,7 +32,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceManager;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Arrays;
 
@@ -61,9 +61,9 @@ public class DeviceSettings extends PreferenceFragment
     private ListPreference mMiddleKeyPref;
     private ListPreference mBottomKeyPref;
 
-    private SwitchPreference mGameModeSwitch;
-    private SwitchPreference mEdgeTouchSwitch;
-    private SwitchPreference mUSB2FastChargeModeSwitch;
+    private SwitchPreferenceCompat mGameModeSwitch;
+    private SwitchPreferenceCompat mEdgeTouchSwitch;
+    private SwitchPreferenceCompat mUSB2FastChargeModeSwitch;
 
     private CustomSeekBarPreference mVibratorStrengthPreference;
 
@@ -76,7 +76,7 @@ public class DeviceSettings extends PreferenceFragment
         mVibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        mGameModeSwitch = (SwitchPreference) findPreference(KEY_GAME_SWITCH);
+        mGameModeSwitch = (SwitchPreferenceCompat) findPreference(KEY_GAME_SWITCH);
         if (Utils.fileWritable(FILE_GAME)) {
             mGameModeSwitch.setEnabled(true);
             mGameModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_GAME_SWITCH,
@@ -86,7 +86,7 @@ public class DeviceSettings extends PreferenceFragment
             mGameModeSwitch.setEnabled(false);
         }
 
-        mEdgeTouchSwitch = (SwitchPreference) findPreference(KEY_EDGE_TOUCH);
+        mEdgeTouchSwitch = (SwitchPreferenceCompat) findPreference(KEY_EDGE_TOUCH);
         if (Utils.fileWritable(FILE_EDGE)) {
             mEdgeTouchSwitch.setEnabled(true);
             mEdgeTouchSwitch.setChecked(sharedPrefs.getBoolean(KEY_EDGE_TOUCH,
@@ -96,7 +96,7 @@ public class DeviceSettings extends PreferenceFragment
             mEdgeTouchSwitch.setEnabled(false);
         }
 
-        mUSB2FastChargeModeSwitch = (SwitchPreference) findPreference(KEY_USB2_SWITCH);
+        mUSB2FastChargeModeSwitch = (SwitchPreferenceCompat) findPreference(KEY_USB2_SWITCH);
         if (Utils.fileWritable(FILE_FAST_CHARGE)) {
             mUSB2FastChargeModeSwitch.setEnabled(true);
             mUSB2FastChargeModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_USB2_SWITCH,
@@ -199,7 +199,7 @@ public class DeviceSettings extends PreferenceFragment
         super.addPreferencesFromResource(preferencesResId);
         // Initialize node preferences
         for (String pref : Constants.sBooleanNodePreferenceMap.keySet()) {
-            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            SwitchPreferenceCompat b = (SwitchPreferenceCompat) findPreference(pref);
             if (b == null) continue;
             String node = Constants.sBooleanNodePreferenceMap.get(pref);
             if (FileUtils.isFileReadable(node)) {
