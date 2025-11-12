@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2016-2022 crDroid Android Project
+     Copyright (C) 2016-2023 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,5 +18,4 @@
 
     <color name="config_icon_tint">?android:attr/colorControlNormal</color>
 
-    <color name="disabled_text_color">#66000000</color> <!-- 38% black -->
 </resources>

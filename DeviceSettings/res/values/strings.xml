@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2016-2022 crDroid Android Project
+     Copyright (C) 2016-2023 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -55,17 +55,6 @@
     <string name="notification_slider_ringer_normal">Normal</string>
     <string name="notification_slider_ringer_vibrate">Vibrate</string>
     <string name="notification_slider_ringer_silent">Silent</string>
-
-    <!-- Vibration control -->
-    <string name="category_vibrator">Vibrator</string>
-    <string name="vib_strength_title_head">Strength</string>
-    <string name="vib_strength_summary_head">Define the strength of the vibrator</string>
-
-    <!-- Custom seekbar -->
-    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="custom_seekbar_default_value">by default</string>
-    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
-    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
 
     <!-- USB 2.0 Force FastCharge -->
     <string name="usb_title">USB</string> 

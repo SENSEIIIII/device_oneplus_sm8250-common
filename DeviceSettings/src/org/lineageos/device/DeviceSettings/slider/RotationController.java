@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2022 crDroid Android Project
+ * Copyright (C) 2018-2024 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,9 +66,9 @@ public final class RotationController extends SliderControllerBase {
         try {
             IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
             if (locked) {
-                wm.freezeRotation(rotation, /* caller= */ "RotationController#setRotation");
+                wm.freezeRotation(rotation, TAG);
             } else {
-                wm.thawRotation(/* caller= */ "RotationController#restoreRotationStateLocked");
+                wm.thawRotation(TAG);
             }
             return true;
         } catch (RemoteException exc) {

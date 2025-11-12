@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */
 
 package org.lineageos.device.DeviceSettings;
 
@@ -51,12 +51,8 @@ public class DeviceSettings extends SettingsBasePreferenceFragment
     private static final String FILE_EDGE = "/proc/touchpanel/oplus_tp_direction";
 
     private static final String KEY_USB2_SWITCH = "usb2_fast_charge";
-    private static final String KEY_VIBSTRENGTH = "vib_strength";
 
     private static final String FILE_FAST_CHARGE = "/sys/module/oplus_chg/parameters/force_fast_charge";
-    private static final String FILE_LEVEL = "/sys/devices/platform/soc/88c000.i2c/i2c-6/6-005a/leds/vibrator/level";
-    private static final long testVibrationPattern[] = {0,5};
-    private static final String DEFAULT = "3";
 
     private ListPreference mTopKeyPref;
     private ListPreference mMiddleKeyPref;
@@ -66,15 +62,10 @@ public class DeviceSettings extends SettingsBasePreferenceFragment
     private SwitchPreferenceCompat mEdgeTouchSwitch;
     private SwitchPreferenceCompat mUSB2FastChargeModeSwitch;
 
-    private CustomSeekBarPreference mVibratorStrengthPreference;
-
-    private Vibrator mVibrator;
-
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.main);
 
-        mVibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         mGameModeSwitch = (SwitchPreferenceCompat) findPreference(KEY_GAME_SWITCH);
@@ -105,15 +96,6 @@ public class DeviceSettings extends SettingsBasePreferenceFragment
             mUSB2FastChargeModeSwitch.setOnPreferenceChangeListener(this);
         } else {
             mUSB2FastChargeModeSwitch.setEnabled(false);
-        }
-
-        mVibratorStrengthPreference =  (CustomSeekBarPreference) findPreference(KEY_VIBSTRENGTH);
-        if (Utils.fileWritable(FILE_LEVEL)) {
-            mVibratorStrengthPreference.setValue(sharedPrefs.getInt(KEY_VIBSTRENGTH,
-                Integer.parseInt(Utils.getFileValue(FILE_LEVEL, DEFAULT))));
-            mVibratorStrengthPreference.setOnPreferenceChangeListener(this);
-        } else {
-            mVibratorStrengthPreference.setEnabled(false);
         }
 
         initNotificationSliderPreference();
@@ -154,13 +136,6 @@ public class DeviceSettings extends SettingsBasePreferenceFragment
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_USB2_SWITCH, enabled).commit();
     	    Utils.writeValue(FILE_FAST_CHARGE, enabled ? "1" : "0");
-            return true;
-        } else if (preference == mVibratorStrengthPreference) {
-            int value = Integer.parseInt(newValue.toString());
-            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-            sharedPrefs.edit().putInt(KEY_VIBSTRENGTH, value).commit();
-            Utils.writeValue(FILE_LEVEL, String.valueOf(value));
-            mVibrator.vibrate(testVibrationPattern, -1);
             return true;
         }
 
@@ -415,15 +390,6 @@ public class DeviceSettings extends SettingsBasePreferenceFragment
             boolean value = sharedPrefs.getBoolean(KEY_USB2_SWITCH,
                 Utils.getFileValueAsBoolean(FILE_FAST_CHARGE, false));
             Utils.writeValue(FILE_FAST_CHARGE, value ? "1" : "0");
-        }
-    }
-
-    public static void restoreVibStrengthSetting(Context context) {
-        if (Utils.fileWritable(FILE_LEVEL)) {
-            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-            int value = sharedPrefs.getInt(KEY_VIBSTRENGTH,
-                Integer.parseInt(Utils.getFileValue(FILE_LEVEL, DEFAULT)));
-            Utils.writeValue(FILE_LEVEL, String.valueOf(value));
         }
     }
 
