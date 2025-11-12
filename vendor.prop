@@ -141,6 +141,12 @@ vendor.display.smomo_game_support=0
 vendor.display.use_layer_ext=1
 vendor.display.use_smooth_motion=1
 
+# Dolby
+ro.vendor.product.device.db=OP_DEVICE
+ro.vendor.product.manufacturer.db=OP_PHONE
+vendor.product.device=OP_PHONE
+vendor.product.manufacturer=OPD
+
 # DPM
 persist.vendor.dpmhalservice.enable=1
 
